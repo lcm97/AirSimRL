@@ -8,9 +8,10 @@ import math
 from PIL import Image
 from keras.models import load_model
 from AdaptedModel import resnet8
+import pandas as pd
 
 class AirSimEnv:
-    def __init__(self, past_k_size=5,navigate_model_path = None, resolution = 128):
+    def __init__(self, past_k_size=5,navigate_model_path = None, resolution = 128, bandwidth_file_path = None):
         # connect to the AirSim simulator
         self.client = airsim.MultirotorClient()
         self.client.confirmConnection()
@@ -25,16 +26,20 @@ class AirSimEnv:
         self.past_k_size = past_k_size
         self.mem_idx = 0
         self.throughput_memory = np.zeros(self.past_k_size, dtype=np.float32)
-        self.strength_memory = np.zeros(self.past_k_size, dtype=np.float32)
-        if navigate_model_path!=None:
+        #self.strength_memory = np.zeros(self.past_k_size, dtype=np.float32)
+        if navigate_model_path is not None:
             self.navigate_model = load_model(navigate_model_path,custom_objects={"SpatialPyramidPooling":SpatialPyramidPooling})
         else:
             self.navigate_model = resnet8(None,None,3)
 
-    def store_transition(self, throughput, strength):
+        if bandwidth_file_path is not None:
+            self.bandwidth_file_path = bandwidth_file_path
+
+
+    def store_transition(self, throughput,):
         index = self.mem_idx % self.past_k_size
         self.throughput_memory[index] = throughput
-        self.strength_memory[index] = strength
+        #self.strength_memory[index] = strength
         self.mem_idx += 1
 
 
@@ -53,6 +58,12 @@ class AirSimEnv:
                 print('Error when capturing image, retrying...')
         return image
 
+    def generator_bandwidth(self,):
+        dataset = pd.read_csv(self.bandwidth_file_path, sep='\t')
+        for i in range(len(dataset)):
+            yield dataset.loc[i, 'throughput_bpms']
+            if i > len(dataset):
+                raise StopIteration
 
     def control(self, steering=0, speed=1):
         yaw = airsim.to_eularian_angles(self.client.simGetVehiclePose().orientation)[2] + steering
@@ -162,6 +173,7 @@ class AirSimEnv:
         else:
             self.resolution = 320
 
+
     def get_reward(self, energy, complexity, resolution, entropy):
         # 计算奖励，并评估回合是否结束
 
@@ -216,10 +228,10 @@ class AirSimEnv:
         self.interpret_action(action)
         image_buf = np.zeros((1, self.resolution, self.resolution, 3))
 
-        #TODO 载入带宽和信号强度数据集，计算时延，根据时延判断是否卸载
+        #载入带宽数据集，计算时延，根据时延判断是否卸载
+        gen_bandwidth = self.generator_bandwidth()
 
-
-        self.store_transition(throughput=12., strength=2.) #存储带宽和信号强度
+        self.store_transition(throughput=next(gen_bandwidth), ) #存储带宽
         start_time=dt.datetime.now()
         while(dt.datetime.now()-start_time).seconds<max_chunk_time:
             image_buf[0] = self.get_image()
@@ -236,6 +248,6 @@ class AirSimEnv:
         ave_complexity = complexity / x
         ave_energy = 3
         reward, done, info = self.get_reward(ave_energy,ave_complexity,self.resolution,ave_entropy)
-        observation = [collision/x,ave_complexity,last_action,self.throughput_memory,self.strength_memory]
+        observation = [collision/x,ave_complexity,last_action,self.throughput_memory]
 
         return observation, reward, done, info
