@@ -1,10 +1,11 @@
 from Env import AirSimEnv
 from ACagent import ACAgent
+from DQNagent import DQNAgent
 import os
 import matplotlib.pyplot as plt
 
 OUTPUT_PATH = "D:\BandwidthDataset\cooked\\"
-#
+
 env = AirSimEnv(bandwidth_file_path= os.path.join(OUTPUT_PATH, 'bandwidth_modified.txt'))
 env.reset(explore_start=True, max_epoch_time=True)
 
@@ -12,8 +13,19 @@ observation, reward, done, info = env.step(last_action=1, action=2, max_chunk_ti
 print(observation)
 # TODO 构建AGENT网络
 agent = ACAgent(alpha=0.00001, beta=0.00005)
+#
+print(agent.decide(observation))
+
+random_inital_steps = 50
+weight_path = None
+train_conv = True
+train = True
+
+agent = DQNAgent(weight_path=weight_path, train_conv=train_conv,
+                 random_inital_steps=random_inital_steps)
 
 print(agent.decide(observation))
+
 
 # collision = np.expand_dims(observation[0], axis=2)
 # complexity = np.expand_dims(observation[1], axis=2)
