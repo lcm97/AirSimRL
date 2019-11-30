@@ -245,9 +245,13 @@ class AirSimEnv:
             print(x)
         #TODO 获取能耗仿真
         ave_entropy = entropy_ / x
-        ave_complexity = complexity / x
         ave_energy = 3
+
+        ave_collision = np.expand_dims([collision / x], axis=2)
+        ave_complexity = np.expand_dims([complexity / x], axis=2)
+        last_action = np.expand_dims([last_action], axis=2)
+        throughput_memory = np.expand_dims(self.throughput_memory, axis=2)
         reward, done, info = self.get_reward(ave_energy,ave_complexity,self.resolution,ave_entropy)
-        observation = [collision/x,ave_complexity,last_action,self.throughput_memory]
+        observation = [ave_collision,ave_complexity,last_action,throughput_memory]
 
         return observation, reward, done, info
