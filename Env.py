@@ -12,11 +12,7 @@ import pandas as pd
 
 class AirSimEnv:
     def __init__(self, past_k_size=5,navigate_model_path = None, resolution = 128, bandwidth_file_path = None):
-        # connect to the AirSim simulator
-        self.client = airsim.MultirotorClient()
-        self.client.confirmConnection()
-        self.client.enableApiControl(True)
-        self.client.armDisarm(True)
+        self.connect()
 
         self.forward = airsim.DrivetrainType.ForwardOnly
         self.yaw = airsim.YawMode(False, 0)
@@ -35,6 +31,12 @@ class AirSimEnv:
         if bandwidth_file_path is not None:
             self.bandwidth_file_path = bandwidth_file_path
 
+    def connect(self):
+        # connect to the AirSim simulator
+        self.client = airsim.MultirotorClient()
+        self.client.confirmConnection()
+        self.client.enableApiControl(True)
+        self.client.armDisarm(True)
 
     def store_transition(self, throughput,):
         index = self.mem_idx % self.past_k_size
@@ -200,8 +202,9 @@ class AirSimEnv:
 
         #reward = math.exp(-1.2 * distance)  # 基于距离的奖励函数
         reward =  energy + complexity + resolution + entropy
-
+        reward = 100
         if distance > 2:  # 偏离路面太远，回合结束
+            print('22222222222222222222')
             self.end_time = dt.datetime.now()
             return reward, True, {'distance': distance}
 
@@ -218,8 +221,6 @@ class AirSimEnv:
 
 
     def step(self, last_action, action, max_chunk_time):
-        print(action)
-        print(max_chunk_time)
         x=0
         entropy_ = 0
         complexity = 0
@@ -237,12 +238,11 @@ class AirSimEnv:
             image_buf[0] = self.get_image()
             model_output = self.navigate_model.predict([image_buf])
             steering = float(model_output[0][0])
-
+            #print(steering)
             collision += model_output[1][0][1]
             entropy_ += entropy(model_output[1][0])
             complexity += float(model_output[2][0])
             x=x+1
-            print(x)
         #TODO 获取能耗仿真
         ave_entropy = entropy_ / x
         ave_energy = 3
@@ -252,6 +252,7 @@ class AirSimEnv:
         last_action = np.expand_dims([last_action], axis=2)
         throughput_memory = np.expand_dims(self.throughput_memory, axis=2)
         reward, done, info = self.get_reward(ave_energy,ave_complexity,self.resolution,ave_entropy)
+        print('reward: %.2f' % reward)
         observation = [ave_collision,ave_complexity,last_action,throughput_memory]
 
         return observation, reward, done, info

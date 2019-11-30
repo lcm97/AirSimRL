@@ -20,10 +20,6 @@ class ACAgent:
 
 
     def build_actor_critic_network(self):
-        # input = Input(shape=self.input_shape)
-
-        # con1 = Conv2D(3, (3, 3), strides=[2, 2], padding='same')(input)
-        # maxpool = MaxPooling2D(pool_size=(3, 3), strides=[2, 2])(con1)
         delta = Input(shape=[1])
         input_1 = Input(shape=[1, 1], name='collision')
         input_2 = Input(shape=[1, 1], name='complexity')
@@ -60,39 +56,27 @@ class ACAgent:
         print(policy.summary())
         return actor, critic, policy
 
-    # def decide(self, observation):
-    #     state = observation[np.newaxis, :]
-    #     probabilities = self.policy.predict(state)[0]
-    #
-    #     action = np.random.choice(self.action_space, p=probabilities)
-    #
-    #     return action
-    def decide(self, observation):
+
+    def interpret_observation(self,observation):
         collision = np.expand_dims(observation[0], axis=2)
         complexity = np.expand_dims(observation[1], axis=2)
         last_action = np.expand_dims(observation[2], axis=2)
         throughput = np.expand_dims(observation[3], axis=0)
-        probabilities = self.policy.predict([collision,complexity,last_action,throughput])[0]
+        return [collision,complexity,last_action,throughput]
+
+
+    def decide(self, observation):
+        probabilities = self.policy.predict(self.interpret_observation(observation))[0]
         action = np.random.choice(self.action_space, p=probabilities)
         return action
 
-    def action2control(self, action):
-        # 将动作转换为控制信号
-        if action == 0:
-            return 0
-        elif action == 1:
-            return 0.5
-        elif action == 2:
-            return -0.5
-        elif action == 3:
-            return 0.25
-        elif action == 4:
-            return -0.25
-
 
     def learn(self, state, action, reward, state_, done):
-        state = state[np.newaxis,:]
-        state_ = state_[np.newaxis,:]
+
+
+        state = self.interpret_observation(state)
+        state_ = self.interpret_observation(state_)
+
         critic_value_ = self.critic.predict(state_)
         critic_value = self.critic.predict(state)
 
@@ -102,6 +86,8 @@ class ACAgent:
         actions = np.zeros([1, self.n_actions])
         actions[np.arange(1), action] = 1
 
-        self.actor.fit([state, delta], actions, verbose=0)
+        act_state = [state[0],state[1],state[2],state[3],delta]
+
+        self.actor.fit(act_state, actions, verbose=0)
 
         self.critic.fit(state, target, verbose=0)

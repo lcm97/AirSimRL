@@ -53,15 +53,6 @@ class DQNAgent:
 
     def build_network(self, activation='relu', weight_path=None,
                       train_conv=True, verbose=True):
-        # inputs = keras.Input(shape=(59, 255, 3))
-        # x = inputs
-        #
-        # # 卷积层
-        # for filte in [16, 32, 32]:
-        #     z = keras.layers.Conv2D(filte, 3, padding='same',
-        #                             activation=activation,
-        #                             trainable=train_conv)(x)
-        #     x = keras.layers.MaxPooling2D(pool_size=2)(z)
 
         input_1 = keras.layers.Input(shape=[1, 1], name='collision')
         input_2 = keras.layers.Input(shape=[1, 1], name='complexity')
@@ -96,13 +87,6 @@ class DQNAgent:
 
         return net
 
-
-    # def decide(self, observation, random=False):
-    #     if random or np.random.rand() < self.epsilon:
-    #         return np.random.randint(self.action_n)
-    #     observations = observation[np.newaxis]
-    #     qs = self.evaluate_net.predict(observations)
-    #     return np.argmax(qs)
     def decide(self, observation, random=False):
         if random or np.random.rand() < self.epsilon:
             return np.random.randint(self.action_n)
@@ -112,19 +96,6 @@ class DQNAgent:
         throughput = np.expand_dims(observation[3], axis=0)
         qs = self.evaluate_net.predict([collision,complexity,last_action,throughput])
         return np.argmax(qs)
-
-    def action2control(self, action):
-        # 将动作转换为控制信号
-        if action == 0:
-            return 0
-        elif action == 1:
-            return 0.5
-        elif action == 2:
-            return -0.5
-        elif action == 3:
-            return 0.25
-        elif action == 4:
-            return -0.25
 
 
     def learn(self, observation, action, reward, next_observation, done):
