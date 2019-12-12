@@ -31,7 +31,6 @@ if __name__ == '__main__':
             print(done)
             while not done:
                 action = agent.decide(observation)
-                print('hello')
                 print('action = {} '.format(action))
                 next_observation, reward, done, info = env.step(last_action=last_action, action=action, max_chunk_time=5)
                 score += reward

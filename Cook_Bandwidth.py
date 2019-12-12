@@ -36,7 +36,7 @@ def plot_log_bandwidth():
 	plt.ylabel('Throughput (Mbit/sec)')
 	plt.show()
 
-
+plot_log_bandwidth()
 def calculate_network_tp():
     files = os.listdir(DATA_PATH)
     for f in files:
@@ -75,7 +75,6 @@ def integration():
     print('Number of data points: {0}'.format(dataframes.shape[0]))
     dataframes.to_csv(os.path.join(OUTPUT_PATH, 'bandwidth_modified.txt'), sep='\t', float_format='%.6f')
 
-#integration()
 
 def generator_bandwidth(bandwidth_file_path):
     dataset = pd.read_csv(bandwidth_file_path, sep='\t')

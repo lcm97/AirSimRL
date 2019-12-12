@@ -4,6 +4,7 @@ import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
 
+
 class DQNReplayer:
     def __init__(self, capacity):
         self.memory = pd.DataFrame(index=range(capacity),
@@ -59,7 +60,7 @@ class DQNAgent:
         input_3 = keras.layers.Input(shape=[1, 1], name='last_action')
         input_4 = keras.layers.Input(shape=(5, 1), name='throughput')
 
-        input_4_ = keras.layers.Conv1D(5, kernel_size=2, strides=1, activation='relu', padding='same')(input_4)
+        input_4_ = keras.layers.Conv1D(125, kernel_size=2, strides=1, activation='relu', padding='same')(input_4)
         input_4_ = keras.layers.MaxPool1D(pool_size=5, strides=1)(input_4_)
 
         input_ = keras.layers.concatenate([input_1, input_2, input_3, input_4_])
@@ -79,6 +80,7 @@ class DQNAgent:
 
         if verbose:
             net.summary()
+            #SVG(model_to_dot(net).create(prog='dot', format='svg'))
 
         if weight_path:
             net.load_weights(weight_path)

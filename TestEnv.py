@@ -11,9 +11,9 @@ env.reset(explore_start=True, max_epoch_time=True)
 
 observation, reward, done, info = env.step(last_action=1, action=2, max_chunk_time=5)
 print(observation)
-# TODO 构建AGENT网络
+
 agent = ACAgent(alpha=0.00001, beta=0.00005)
-#
+
 print(agent.decide(observation))
 
 random_inital_steps = 50

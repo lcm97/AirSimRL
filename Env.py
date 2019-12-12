@@ -180,7 +180,7 @@ class AirSimEnv:
         # 计算奖励，并评估回合是否结束
 
         collision_info = self.client.simGetCollisionInfo()  # 碰撞信息
-        if collision_info.has_collided:  # 如果撞车了，没有奖励，回合结束
+        if collision_info.has_collided:  # 如果发生了碰撞，没有奖励，回合结束
             self.end_time = dt.datetime.now()
             return 0.0, True, {'message': 'collided'}
 
@@ -202,9 +202,10 @@ class AirSimEnv:
 
         #reward = math.exp(-1.2 * distance)  # 基于距离的奖励函数
         reward =  energy + complexity + resolution + entropy
+        print(energy,' ',complexity[0][0],' ',resolution,' ',entropy)
+
         reward = 100
         if distance > 2:  # 偏离路面太远，回合结束
-            print('22222222222222222222')
             self.end_time = dt.datetime.now()
             return reward, True, {'distance': distance}
 
