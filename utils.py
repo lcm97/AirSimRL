@@ -45,3 +45,19 @@ def plotLearning2(scores, filename, x=None, window=5):
     plt.xlabel('Game')
     plt.plot(x, running_avg)
     plt.savefig(filename)
+
+def plotPower():
+    resolution = [32, 64, 128, 256, 320]
+    dnn_power = [2628.95, 2677.96, 3066.24,4576.58,4788.67]
+    gest_power = [2621,2650.21,2687,2914,3123]
+    plt.ylabel('Power consumption(mW)')
+    plt.xlabel('Resolution')
+
+    plt.xticks(range(len(resolution)), resolution)
+    plt.plot(dnn_power,'o-',label='local')
+    plt.plot(gest_power, 'x-',label='offload')
+    plt.legend(loc='upper left')
+
+    plt.show()
+
+plotPower()
