@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import random
+from math import exp
 
 def plotLearning(x, scores, epsilons, filename, lines=None):
     fig=plt.figure()
@@ -60,4 +62,30 @@ def plotPower():
 
     plt.show()
 
-plotPower()
+def debugReward():
+    energy = random.uniform(2.,5.)
+    complexity = random.uniform(20.,80.)
+    resolution = random.choice([32.,64.,128.,256.,320.])
+    entropy = random.uniform(0.,0.5)
+    print(energy, ' ', complexity, ' ', resolution, ' ', entropy)
+    scaled_complexity = 4.8 * complexity - 64
+    print(abs(scaled_complexity-resolution))
+    k1 = 6.9
+    k2 = 1.47
+    k3 = 70.0
+    # print(k2*exp(k3*((4.8*complexity[0][0]-64)-resolution)))
+    reward = 500.0 - k1 * energy - k2 * abs(scaled_complexity - resolution)- k3 * entropy
+    print(reward)
+    return reward
+
+
+debugReward()
+i=0
+reward_list = []
+while i<50:
+    reward_list.append(debugReward())
+    i+=1
+x = range(50)
+plt.plot(x,reward_list)
+plt.show()
+

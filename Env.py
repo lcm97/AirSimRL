@@ -204,13 +204,13 @@ class AirSimEnv:
         #reward = math.exp(-1.2 * distance)  # 基于距离的奖励函数
         #reward =  energy + complexity + resolution + entropy
         print(energy,' ',complexity[0][0],' ',resolution,' ',entropy)
-
+        scaled_complexity = 4.8 * complexity[0][0] - 64
         k1 = 1.0
         k2 = 3.0
         k3 = 1.0
         k4 = 6.0
         #print(k2*exp(k3*((4.8*complexity[0][0]-64)-resolution)))
-        reward = 500.0 - k1*energy - k2*exp(k3*(complexity[0][0]-resolution)) - k4*entropy
+        reward = 500.0 - k1*energy - k2*exp(k3*(scaled_complexity-resolution)) - k4*entropy
         #reward = 100
         if distance > 2:  # 偏离路面太远，回合结束
             self.end_time = dt.datetime.now()
