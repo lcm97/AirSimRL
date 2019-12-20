@@ -74,7 +74,7 @@ def debugReward():
     k2 = 1.47
     k3 = 70.0
     # print(k2*exp(k3*((4.8*complexity[0][0]-64)-resolution)))
-    reward = 500.0 - k1 * energy - k2 * abs(scaled_complexity - resolution)- k3 * entropy
+    reward = - k1 * energy - k2 * abs(scaled_complexity - resolution)- k3 * entropy
     print(reward)
     return reward
 
