@@ -1,11 +1,13 @@
-from keras.models import Model
-from keras.layers import Dense, Dropout, Activation, Input
+from keras import regularizers
 from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Dense, Dropout, Activation, Input
 from keras.layers.merge import add
 from keras.layers.normalization import BatchNormalization
-from keras import regularizers
-from SpatialPyramidPooling import SpatialPyramidPooling
-#os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+from keras.models import Model
+import os
+from DNNmodel.SpatialPyramidPooling import SpatialPyramidPooling
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 batch_size = 64
 
@@ -84,8 +86,8 @@ def resnet8(img_width, img_height, num_channels):
     steering = Dense(1,name="steering")(x)
 
     # Collision channel
-    collision = Dense(2,name='collision')(x)
-    collision = Activation('softmax')(collision)
+    collision = Dense(1,name='collision')(x)
+    collision = Activation('sigmoid')(collision)
 
     # Complexity channel
     complexity = Dense(1,name='complexity')(x)

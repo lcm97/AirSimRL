@@ -1,15 +1,17 @@
-import airsim
-import numpy as np
-from SpatialPyramidPooling import SpatialPyramidPooling
-from scipy.stats import entropy
-from math import exp
-import time
 import datetime as dt
 import math
+from math import exp
+
+import airsim
+import numpy as np
+import pandas as pd
 from PIL import Image
 from keras.models import load_model
-from AdaptedModel import resnet8
-import pandas as pd
+from scipy.stats import entropy
+
+from DNNmodel.AdaptedModel import resnet8
+from DNNmodel.SpatialPyramidPooling import SpatialPyramidPooling
+
 
 class AirSimEnv:
     def __init__(self, past_k_size=5,navigate_model_path = None, resolution = 128, bandwidth_file_path = None):
