@@ -9,7 +9,7 @@ gflags.DEFINE_integer('img_height', 32, 'Target Image Height')
 gflags.DEFINE_integer('crop_img_width', 200, 'Cropped image widht')
 gflags.DEFINE_integer('crop_img_height', 200, 'Cropped image height')
 
-gflags.DEFINE_string('img_mode', "grayscale", 'Load mode for images, either '
+gflags.DEFINE_string('img_mode', "rgb", 'Load mode for images, either '
                      'rgb or grayscale')
 
 # Training
@@ -27,6 +27,11 @@ gflags.DEFINE_string('val_dir', "C:\dataset\Dronet\\validation", 'Folder contain
                      ' validation experiments')
 gflags.DEFINE_string('test_dir', "../testing", 'Folder containing'
                      ' testing experiments')
+
+gflags.DEFINE_string('raw_data_dir', "C:\dataset\AirSimData\data_raw", 'Folder containing'
+                     ' raw data to be cooked')
+gflags.DEFINE_string('cooked_data_dir', "C:\dataset\AirSimData\data_cooked", 'Folder containing'
+                     ' cooked data')
 
 # Model
 gflags.DEFINE_bool('restore_model', False, 'Whether to restore a trained'
