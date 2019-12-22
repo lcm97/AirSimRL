@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd946058-b778-4b8d-bd6d-d26172e73e5b" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CookData/CleanData.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CookData/Cooking.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CookData/Generator.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CookData/ImageResize.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CookData/PrepareData.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DNNmodel/TrainModel.py" afterPath="$PROJECT_DIR$/DNNmodel/TrainModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_flags.py" afterPath="$PROJECT_DIR$/common_flags.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DNNmodel/model/model_256.h5" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CookData/PrepareData.py" afterPath="$PROJECT_DIR$/CookData/PrepareData.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +18,7 @@
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$Plot_Bandwidth.coverage" NAME="Plot_Bandwidth Coverage Results" MODIFIED="1575013211162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$TestEnv.coverage" NAME="TestEnv Coverage Results" MODIFIED="1575098366663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$DQNtrain.coverage" NAME="DQNtrain Coverage Results" MODIFIED="1575437105444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AdaptAirsimRL$PrepareData.coverage" NAME="PrepareData Coverage Results" MODIFIED="1577018493966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CookData" />
+    <SUITE FILE_PATH="coverage/AdaptAirsimRL$PrepareData.coverage" NAME="PrepareData Coverage Results" MODIFIED="1577022181140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CookData" />
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$Label.coverage" NAME="Label Coverage Results" MODIFIED="1577012829681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CookData" />
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$CleanData.coverage" NAME="CleanData Coverage Results" MODIFIED="1577016658042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CookData" />
     <SUITE FILE_PATH="coverage/AdaptAirsimRL$ACtrain.coverage" NAME="ACtrain Coverage Results" MODIFIED="1576157671791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -89,14 +83,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrepareData.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PrepareData.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CookData/PrepareData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="19" column="61" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="108">
+              <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,7 +103,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cooking.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Cooking.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CookData/Cooking.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-659">
@@ -155,10 +147,10 @@
         <option value="$PROJECT_DIR$/CookData/ImageResize.py" />
         <option value="$PROJECT_DIR$/CookData/CleanData.py" />
         <option value="$PROJECT_DIR$/CookData/Cooking.py" />
-        <option value="$PROJECT_DIR$/CookData/PrepareData.py" />
         <option value="$PROJECT_DIR$/CookData/Generator.py" />
         <option value="$PROJECT_DIR$/common_flags.py" />
         <option value="$PROJECT_DIR$/DNNmodel/TrainModel.py" />
+        <option value="$PROJECT_DIR$/CookData/PrepareData.py" />
       </list>
     </option>
   </component>
@@ -169,8 +161,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="142" />
+    <option name="x" value="-331" />
+    <option name="y" value="130" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -226,24 +218,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DNNmodel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AdaptAirsimRL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AdaptAirsimRL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="CookData" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -282,7 +256,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.TrainModel">
+  <component name="RunManager" selected="Python.PrepareData">
     <configuration default="false" name="TrainModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -535,8 +509,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.TrainModel" />
-        <item index="1" class="java.lang.String" itemvalue="Python.PrepareData" />
+        <item index="0" class="java.lang.String" itemvalue="Python.PrepareData" />
+        <item index="1" class="java.lang.String" itemvalue="Python.TrainModel" />
         <item index="2" class="java.lang.String" itemvalue="Python.CleanData" />
         <item index="3" class="java.lang.String" itemvalue="Python.ImageResize" />
         <item index="4" class="java.lang.String" itemvalue="Python.Label" />
@@ -557,7 +531,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="142" width="1936" height="1056" extended-state="1" />
+    <frame x="-331" y="130" width="1936" height="1056" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1013,16 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CookData/PrepareData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="61" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common_flags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1056,6 +1020,14 @@
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CookData/PrepareData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

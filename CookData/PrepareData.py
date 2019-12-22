@@ -7,7 +7,7 @@ import CookData.Cooking as Cooking
 
 def cook():
     #data_folders = ['320','64','128','256','32']
-    data_folders = ['256']
+    data_folders = ['128']
     full_path_raw_folders = [os.path.join(FLAGS.raw_data_dir, f) for f in data_folders]
     dataframes = []
     for folder in full_path_raw_folders:
