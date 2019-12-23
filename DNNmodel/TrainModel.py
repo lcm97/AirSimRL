@@ -7,6 +7,7 @@ import gflags
 import h5py
 from keras import optimizers
 from CookData.Generator import DriveDataGenerator
+from CookData.DataGenerator import DroneDataGenerator
 import h5py
 from PIL import ImageDraw
 import math
@@ -67,16 +68,16 @@ def train():
     else:
         raise IOError("Unidentified image mode: use 'grayscale' or 'rgb'")
 
+
     train_dataset = h5py.File(os.path.join(FLAGS.cooked_data_dir, 'train.h5'), 'r')
     eval_dataset = h5py.File(os.path.join(FLAGS.cooked_data_dir, 'eval.h5'), 'r')
-    test_dataset = h5py.File(os.path.join(FLAGS.cooked_data_dir, 'test.h5'), 'r')
+    # test_dataset = h5py.File(os.path.join(FLAGS.cooked_data_dir, 'test.h5'), 'r')
     num_train_examples = train_dataset['image'].shape[0]
     num_eval_examples = eval_dataset['image'].shape[0]
-    num_test_examples = test_dataset['image'].shape[0]
+    # num_test_examples = test_dataset['image'].shape[0]
 
     batch_size = 32
     data_generator = DriveDataGenerator(rescale=1. / 255., horizontal_flip=True, brightness_range=[0.8, 1.2])
-
     train_generator = data_generator.flow \
         (train_dataset['image'], train_dataset['steering'], train_dataset['collision'], train_dataset['complexity'],
          batch_size=batch_size, zero_drop_percentage=0.1)
@@ -84,9 +85,10 @@ def train():
         (eval_dataset['image'], eval_dataset['steering'], eval_dataset['collision'], eval_dataset['complexity'],
          batch_size=batch_size, zero_drop_percentage=0.1)
 
-    [sample_batch_train_data, sample_batch_label] = next(train_generator)
-    for i in range(0, 3, 1):
-        draw_image_with_label(sample_batch_train_data[i], sample_batch_label[1][i])
+    # [sample_batch_train_data, sample_batch_label] = next(train_generator)
+    # print(sample_batch_train_data)
+    # for i in range(0, 3, 1):
+    #     draw_image_with_label(sample_batch_train_data[i], sample_batch_label[1][i])
 
 
     model = getModel(None, None, img_channels, None)

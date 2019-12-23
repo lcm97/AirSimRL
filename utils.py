@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import cv2
+import os
 from math import exp
 
 def plotLearning(x, scores, epsilons, filename, lines=None):
@@ -78,14 +80,32 @@ def debugReward():
     print(reward)
     return reward
 
+def load_img(path, grayscale=False):
+    """
+    Load an image.
 
-debugReward()
-i=0
-reward_list = []
-while i<50:
-    reward_list.append(debugReward())
-    i+=1
-x = range(50)
-plt.plot(x,reward_list)
-plt.show()
+    # Arguments
+        path: Path to image file.
+        grayscale: Boolean, whether to load the image as grayscale.
+    # Returns
+        Image as numpy array.
+    """
+    img = cv2.imread(path,-1)
+    if grayscale:
+        if len(img.shape) != 2:
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = img.reshape((img.shape[0], img.shape[1], 1))
+
+    return np.asarray(img, dtype=np.float32)
+# debugReward()
+# i=0
+# reward_list = []
+# while i<50:
+#     reward_list.append(debugReward())
+#     i+=1
+# x = range(50)
+# plt.plot(x,reward_list)
+# plt.show()
+
+
 
